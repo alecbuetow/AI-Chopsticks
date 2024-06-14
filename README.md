@@ -1,2 +1,4 @@
 # Chopsticks
-AI Solution to Classic Children's Game
+
+### Key Takeaways
+- AI Solution to Classic Children's Game
