@@ -5,7 +5,7 @@ https://en.wikipedia.org/wiki/Chopsticks_(hand_game)
 """
 
 
-# predetermined dictionary of state scores for the minimax algorithm - saves user computation time in 
+# predetermined dictionary of state scores for the minimax algorithm - saves user computation time 
 import json
 with open("possible_state_dict.json") as f:
     possible_state_dict = json.load(f)
@@ -147,9 +147,9 @@ class Chopstick:
                 else:
                     score = self.minimax(possible_state, depth + 1, next_player)
                     if score > 0:
-                        score -= depth
+                        score -= 1
                     elif score < 0:
-                        score += depth
+                        score += 1
                 possible_state_dict[player][possible_state] = score
                 best = max(best, score)
             return best
@@ -162,9 +162,9 @@ class Chopstick:
                 else:
                     score = self.minimax(possible_state, depth + 1, next_player)
                     if score > 0:
-                        score -= depth
+                        score -= 1
                     elif score < 0:
-                        score += depth 
+                        score += 1 
                 possible_state_dict[player][possible_state] = score
                 best = min(best, score)
             return best
@@ -193,13 +193,14 @@ class Chopstick:
         return best_state
 
 
-    def spectate_AI(self, number_of_rounds = 1000):
-        # watch the AI play against itself (note: this will never end, as chopsticks is a zero-sum game if both sides play perfectly)
+    def spectate_AI(self):
+        # watch the AI play against itself
         state = "11|11"
         player = 0
         print("Player     State     Turn #")
-        for turns in range(number_of_rounds):
-
+        turns = 0
+        while True:
+            
             print(player, "        ", state, "   ", turns)
             if self.evaluate(state) != 0:
                 print("Completed!")
@@ -208,7 +209,7 @@ class Chopstick:
 
             state = self.find_best_state(state, player)
             player = 1 - player
-
+            turns +=  1
     
     def play_AI(self, player_choice = 0):
         # play against the AI to master chopsticks
